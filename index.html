@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalil Khamma - Data Analyst &amp; Business Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1B2C;
+    --ink-2:#132840;
+    --paper:#EEF1F0;
+    --paper-dim:#B9C3CE;
+    --line:rgba(238,241,240,0.14);
+    --teal:#4FD1C5;
+    --amber:#E8A33D;
+    --slate:#7C8CA6;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.55;
+    overflow-x:hidden;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  a{color:inherit;}
+
+  ::selection{background:var(--teal); color:var(--ink);}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,27,44,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    font-family:var(--mono); font-size:14px; letter-spacing:0.02em;
+    color:var(--paper);
+  }
+  .logo span{color:var(--amber);}
+  .navlinks{display:flex; gap:28px; list-style:none;}
+  .navlinks a{
+    font-family:var(--mono); font-size:12.5px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--paper-dim); text-decoration:none;
+    transition:color .2s ease;
+    position:relative;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--teal);}
+  .navlinks a:focus-visible{outline:2px solid var(--teal); outline-offset:4px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--amber);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; width:8px; height:8px; border-radius:50%;
+    background:var(--amber); box-shadow:0 0 0 4px rgba(232,163,61,0.18);
+  }
+  h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(38px, 6vw, 66px);
+    line-height:1.04; letter-spacing:-0.01em;
+    max-width:820px;
+  }
+  h1 .accent{color:var(--teal);}
+  .hero-sub{
+    margin-top:26px; max-width:560px; color:var(--paper-dim);
+    font-size:17px;
+  }
+  .hero-cta{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.03em;
+    padding:13px 24px; border-radius:2px; text-decoration:none;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--teal); color:var(--ink); font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px); background:#63dccf;}
+  .btn-ghost{border:1px solid var(--slate); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-2px);}
+
+  /* ---------- KPI DASHBOARD (signature) ---------- */
+  .dash{
+    margin-top:64px;
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    border:1px solid var(--line);
+  }
+  .kpi{
+    padding:22px 20px; border-right:1px solid var(--line);
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .kpi:last-child{border-right:none;}
+  .kpi .label{
+    font-family:var(--mono); font-size:11px; color:var(--slate);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;
+    line-height:1.35; min-height:30px;
+  }
+  .kpi .value{
+    font-family:var(--mono); font-weight:600; font-size:28px; color:var(--paper);
+    display:flex; align-items:baseline; margin-top:auto;
+  }
+  .kpi .value .unit{font-size:15px; color:var(--teal); margin-left:4px;}
+  .kpi .bar{
+    margin-top:12px; height:4px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden;
+  }
+  .kpi .bar-fill{
+    height:100%; background:var(--teal); width:0%;
+    transition:width 1.1s cubic-bezier(.2,.8,.2,1);
+  }
+  @media(prefers-reduced-motion: reduce){
+    .kpi .bar-fill{transition:none;}
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:88px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:48px;}
+  .sec-num{font-family:var(--mono); color:var(--amber); font-size:14px;}
+  .sec-title{font-family:var(--display); font-weight:600; font-size:32px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px;
+  }
+  .about-text p{color:var(--paper-dim); margin-bottom:18px; font-size:15.5px;}
+  .about-text strong{color:var(--paper); font-weight:600;}
+  .ledger{
+    border:1px solid var(--line); font-family:var(--mono); font-size:13.5px;
+  }
+  .ledger-row{
+    display:flex; justify-content:space-between; padding:14px 18px;
+    border-bottom:1px solid var(--line); color:var(--paper-dim);
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row span:first-child{color:var(--slate);}
+  .ledger-row span:last-child{color:var(--paper); text-align:right;}
+  .ledger-head{
+    padding:14px 18px; background:rgba(255,255,255,0.03);
+    font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--amber); border-bottom:1px solid var(--line);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{display:flex; flex-direction:column; gap:2px;}
+  .project{
+    border:1px solid var(--line); padding:36px;
+    display:grid; grid-template-columns:64px 1fr auto; gap:28px;
+    align-items:start; margin-bottom:16px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .project:hover{border-color:var(--teal); background:rgba(79,209,197,0.03);}
+  .project-idx{
+    font-family:var(--mono); font-size:13px; color:var(--slate); padding-top:4px;
+  }
+  .project-title{
+    font-family:var(--display); font-weight:600; font-size:21px; margin-bottom:10px;
+  }
+  .project-desc{color:var(--paper-dim); font-size:14.5px; margin-bottom:16px; max-width:560px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--mono); font-size:11px; color:var(--teal);
+    border:1px solid rgba(79,209,197,0.35); padding:4px 10px; border-radius:2px;
+  }
+  .project-metric{
+    font-family:var(--mono); text-align:right; min-width:120px;
+  }
+  .project-metric .num{font-size:26px; font-weight:600; color:var(--amber); display:block;}
+  .project-metric .cap{font-size:10.5px; color:var(--slate); text-transform:uppercase; letter-spacing:0.05em;}
+
+  @media(max-width:760px){
+    .project{grid-template-columns:1fr; }
+    .project-metric{text-align:left;}
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+  .skill-col .col-title{
+    font-family:var(--mono); font-size:11px; color:var(--slate);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;
+    border-bottom:1px solid var(--line); padding-bottom:10px;
+  }
+  .skill-item{
+    display:flex; justify-content:space-between; padding:8px 0; font-size:14px;
+    color:var(--paper-dim); border-bottom:1px dashed rgba(255,255,255,0.06);
+  }
+  .skill-item span:last-child{font-family:var(--mono); color:var(--teal); font-size:12px;}
+
+  @media(max-width:760px){ .skills-grid{grid-template-columns:1fr;} }
+
+  /* ---------- CONTACT ---------- */
+  .contact{border-bottom:none;}
+  .contact-inner{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;
+  }
+  .contact h2{
+    font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,46px);
+    max-width:520px; line-height:1.1;
+  }
+  .contact h2 .accent{color:var(--teal);}
+  .contact-links{display:flex; flex-direction:column; gap:14px; font-family:var(--mono); font-size:14px;}
+  .contact-links a{text-decoration:none; color:var(--paper-dim); transition:color .2s ease;}
+  .contact-links a:hover{color:var(--teal);}
+  .contact-links a:focus-visible{outline:2px solid var(--teal); outline-offset:4px;}
+  .contact-links .k{color:var(--slate); font-size:11px; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:2px;}
+
+  footer{
+    padding:28px 0; font-family:var(--mono); font-size:11.5px; color:var(--slate);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media(max-width:700px){
+    .dash{grid-template-columns:repeat(2,1fr);}
+    .kpi:nth-child(2){border-right:none;}
+    .about-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">KK<span>_</span>DATA</div>
+    <ul class="navlinks">
+      <li><a href="#about">Profil</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="eyebrow">Disponible pour une alternance - septembre 2026</div>
+    <h1>Transformer la donnée<br>en <span class="accent">décisions claires</span>.</h1>
+    <p class="hero-sub">Khalil Khamma - étudiant en MSc Data Science &amp; Business Intelligence à EPITECH Toulouse. Je construis des modèles, des pipelines et des dashboards à partir d'un œil formé par une classe prépa et un master en contrôle de gestion.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">Voir les projets →</a>
+      <a class="btn btn-ghost" href="#contact">Me contacter</a>
+    </div>
+
+    <div class="dash" id="dash">
+      <div class="kpi">
+        <div class="label">Leads automatisés</div>
+        <div class="value">60<span class="unit">/jour</span></div>
+        <div class="bar"><div class="bar-fill" data-w="70%"></div></div>
+      </div>
+      <div class="kpi">
+        <div class="label">Précision modèle</div>
+        <div class="value">0.77<span class="unit">ROC</span></div>
+        <div class="bar"><div class="bar-fill" data-w="77%"></div></div>
+      </div>
+      <div class="kpi">
+        <div class="label">Segments clients</div>
+        <div class="value">3<span class="unit">clusters</span></div>
+        <div class="bar"><div class="bar-fill" data-w="45%"></div></div>
+      </div>
+      <div class="kpi">
+        <div class="label">Projets data menés</div>
+        <div class="value">4<span class="unit">projets</span></div>
+        <div class="bar"><div class="bar-fill" data-w="60%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">Profil</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>J'ai commencé par la finance : un master en <strong>Audit et Contrôle de Gestion</strong> à l'ENCG Kénitra, au Maroc. C'est là que j'ai appris à lire un tableau de chiffres avant d'apprendre à le construire.</p>
+        <p>Aujourd'hui je poursuis ce fil en MSc <strong>Data Science &amp; Business Intelligence</strong> à EPITECH Toulouse (2025–2027). Ce que le contrôle de gestion m'a donné - la rigueur sur les chiffres, la lecture business d'un indicateur - je le mets maintenant au service de modèles prédictifs et de dashboards.</p>
+        <p>Je cherche une <strong>alternance d'un an à partir de septembre 2026</strong>, rythme 9 semaines en entreprise / 1 semaine à l'école, sur des postes Data Analyst, Data Scientist ou Business Intelligence. Basé à Toulouse, mobile sur toute la France.</p>
+      </div>
+      <div class="ledger">
+        <div class="ledger-head">Parcours</div>
+        <div class="ledger-row"><span>2025 - 2027</span><span>MSc Data Science &amp; BI, EPITECH Toulouse</span></div>
+        <div class="ledger-row"><span>2023 - 2024</span><span>Conseiller Client, Webhelp Meknès</span></div>
+        <div class="ledger-row"><span>Fév - Juin 2023</span><span>Stage analyse données, Lear Automotive</span></div>
+        <div class="ledger-row"><span>2018 - 2023</span><span>Classe prépa + Master Audit &amp; Contrôle de Gestion, ENCG Kénitra</span></div>
+        <div class="ledger-head">Langues</div>
+        <div class="ledger-row"><span>Arabe</span><span>Langue maternelle</span></div>
+        <div class="ledger-row"><span>Français</span><span>B2 - DELF</span></div>
+        <div class="ledger-row"><span>Anglais</span><span>C1 - TOEFL 101/120</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Projets</h2>
+    </div>
+    <div class="projects">
+      <div class="project">
+        <div class="project-idx">01</div>
+        <div>
+          <div class="project-title">Neotravel : Digitalisation de la Gestion des Leads</div>
+          <p class="project-desc">Une entreprise de transport traitait ~60 leads/jour manuellement, avec pertes et retards à la clé. Objectif : digitaliser sans déshumaniser. Un chatbot intelligent (Vercel AI SDK) collecte les données client, applique une logique de triage automatique (urgence, volume, montant) et route vers un commercial si nécessaire. Intégration de l'IA, implémentation de la formule de calcul du devis, structuration de la base Supabase, et pipeline d'envoi automatique du devis avec relances via n8n (lien de prise de RDV intégré). Projet EPITECH, équipe de 4.</p>
+          <div class="tags">
+            <span class="tag">IA Agentique</span>
+            <span class="tag">Vercel AI SDK</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">n8n</span>
+          </div>
+        </div>
+        <div class="project-metric">
+          <span class="num">60</span>
+          <span class="cap">Leads/jour</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-idx">02</div>
+        <div>
+          <div class="project-title">AI Travel Assistant</div>
+          <p class="project-desc">Agent LLM autonome capable de planifier un trajet : extraction des codes aéroports par prompt engineering, orchestration d'API de vols en temps réel, réponses structurées en JSON. Projet d'équipe, 2026.</p>
+          <div class="tags">
+            <span class="tag">LLM / Ollama</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">API orchestration</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="project-metric">
+          <span class="num">Agent</span>
+          <span class="cap">Autonome</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-idx">03</div>
+        <div>
+          <div class="project-title">Credit Scoring - Modèle prédictif</div>
+          <p class="project-desc">Pipeline complet de classification pour évaluer un risque de crédit : préparation des données, feature engineering, Random Forest. Lead technique d'une équipe de 5 personnes.</p>
+          <div class="tags">
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Random Forest</span>
+            <span class="tag">Lead technique</span>
+          </div>
+        </div>
+        <div class="project-metric">
+          <span class="num">0.77</span>
+          <span class="cap">Accuracy</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-idx">04</div>
+        <div>
+          <div class="project-title">Segmentation Client &amp; Dashboarding BI</div>
+          <p class="project-desc">Segmentation d'une base clients par K-Means, puis mise en dashboard des indicateurs clés (KPI) pour une lecture business directe des segments.</p>
+          <div class="tags">
+            <span class="tag">K-Means</span>
+            <span class="tag">Metabase</span>
+            <span class="tag">KPI Dashboarding</span>
+          </div>
+        </div>
+        <div class="project-metric">
+          <span class="num">3</span>
+          <span class="cap">Segments</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Compétences</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <div class="col-title">Data &amp; ML</div>
+        <div class="skill-item"><span>Python</span><span>Pandas / NumPy</span></div>
+        <div class="skill-item"><span>Machine Learning</span><span>Scikit-learn</span></div>
+        <div class="skill-item"><span>SQL</span><span>Requêtes / modélisation</span></div>
+        <div class="skill-item"><span>Git</span><span>Feature branch workflow</span></div>
+      </div>
+      <div class="skill-col">
+        <div class="col-title">BI &amp; Business</div>
+        <div class="skill-item"><span>Power BI</span><span>Dashboards KPI</span></div>
+        <div class="skill-item"><span>n8n</span><span>Automatisation workflows</span></div>
+        <div class="skill-item"><span>Supabase</span><span>Base de données</span></div>
+        <div class="skill-item"><span>Excel avancé</span><span>Reporting financier</span></div>
+        <div class="skill-item"><span>Audit &amp; contrôle de gestion</span><span>Rigueur analytique</span></div>
+      </div>
+      <div class="skill-col">
+        <div class="col-title">Hors écran</div>
+        <div class="skill-item"><span>Football</span><span>Collectif</span></div>
+        <div class="skill-item"><span>Basketball</span><span>Compétitif</span></div>
+        <div class="skill-item"><span>Randonnée</span><span>Endurance</span></div>
+        <div class="skill-item"><span>Gaming</span><span>Stratégie</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap contact">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Contact</h2>
+    </div>
+    <div class="contact-inner">
+      <h2>Une alternance à pourvoir en data ?<br><span class="accent">Parlons-en.</span></h2>
+      <div class="contact-links">
+        <a href="mailto:khalil.khamma@epitech.eu"><span class="k">Email</span>khalil.khamma@epitech.eu</a>
+        <a href="https://linkedin.com/in/khalil-khamma" target="_blank" rel="noopener"><span class="k">LinkedIn</span>linkedin.com/in/khalil-khamma</a>
+        <a href="https://github.com/mbabedse7ra" target="_blank" rel="noopener"><span class="k">GitHub</span>github.com/mbabedse7ra</a>
+        <a href="#"><span class="k">Localisation</span>Toulouse - mobile sur toute la France</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Khalil Khamma</span>
+  <span>Construit avec HTML / CSS - pas de framework, comme un bon dashboard.</span>
+</footer>
+
+<script>
+  // Animate KPI bars on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.bar-fill').forEach((el, i) => {
+      setTimeout(() => { el.style.width = el.dataset.w; }, 150 + i * 120);
+    });
+  });
+</script>
+
+</body>
+</html>
