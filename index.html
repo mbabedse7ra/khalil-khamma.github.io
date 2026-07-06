@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
 <title>Khalil Khamma - Data Analyst &amp; Business Intelligence</title>
 <meta name="description" content="Projets data (ML, BI, IA agentique) et parcours hybride finance/data science. En recherche d'alternance pour septembre 2026.">
 
@@ -42,7 +43,7 @@
 
   *{box-sizing:border-box; margin:0; padding:0;}
 
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; color-scheme:dark;}
 
   body{
     background:var(--ink);
@@ -127,8 +128,12 @@
   .btn-ghost:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-2px);}
 
   /* ---------- KPI DASHBOARD (signature) ---------- */
+  .dash-intro{
+    margin-top:64px; margin-bottom:14px;
+    font-family:var(--mono); font-size:12px; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.06em;
+  }
   .dash{
-    margin-top:64px;
     display:grid; grid-template-columns:repeat(4, 1fr);
     border:1px solid var(--line);
   }
@@ -293,6 +298,7 @@
       <a class="btn btn-ghost" href="#contact">Me contacter</a>
     </div>
 
+    <div class="dash-intro">Quelques résultats tirés de mes projets, détaillés plus bas ↓</div>
     <div class="dash" id="dash">
       <div class="kpi">
         <div class="value">60<span class="unit">/jour</span></div>
@@ -324,8 +330,8 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>J'ai commencé par la finance : un master en <strong>Audit et Contrôle de Gestion</strong> à l'ENCG Kénitra, au Maroc. C'est là que j'ai appris à lire un tableau de chiffres avant d'apprendre à le construire.</p>
-        <p>Aujourd'hui je poursuis ce fil en MSc <strong>Data Science &amp; Business Intelligence</strong> à EPITECH Toulouse (2025–2027). Ce que le contrôle de gestion m'a donné - la rigueur sur les chiffres, la lecture business d'un indicateur - je le mets maintenant au service de modèles prédictifs et de dashboards.</p>
+        <p>Je suis étudiant en MSc <strong>Data Science &amp; Business Intelligence</strong> à EPITECH Toulouse (2025 - 2027). Je construis des modèles prédictifs, des pipelines de données et des dashboards business : du scoring crédit à l'automatisation de leads avec de l'IA agentique, en passant par la segmentation client.</p>
+        <p>Avant ça, j'ai fait un master en <strong>Audit et Contrôle de Gestion</strong> à l'ENCG Kénitra, au Maroc. Ça reste utile aujourd'hui : la rigueur sur les chiffres et la lecture business d'un indicateur, je les retrouve dans chacun de mes projets data.</p>
         <p>Je cherche une <strong>alternance d'un an à partir de septembre 2026</strong>, rythme 9 semaines en entreprise / 1 semaine à l'école, sur des postes Data Analyst, Data Scientist ou Business Intelligence. Basé à Toulouse, mobile sur toute la France.</p>
       </div>
       <div class="ledger">
@@ -470,7 +476,7 @@
 
 <footer class="wrap">
   <span>© 2026 Khalil Khamma</span>
-  <span>Construit avec HTML / CSS - pas de framework, comme un bon dashboard.</span>
+  <span>Construit avec HTML / CSS.</span>
 </footer>
 
 <script>
